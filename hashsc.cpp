@@ -36,6 +36,11 @@ bool isValid(YAML::Node &config) {
 int main(int argc, char* argv[]) {
     std::cout << "Handling "<< argc <<" arguments" << std::endl;
     switch (argc) {
+    case 1:{
+        for(string line; std::getline(std::cin, line);) {
+            std::cout << base64_encode(reinterpret_cast<const unsigned char*>(line.c_str()), line.length()) << std::endl;
+        }
+    } break;
     case 2:{
         std::string encodeText = argv[1];
         std::cout << base64_encode(reinterpret_cast<const unsigned char*>(encodeText.c_str()), encodeText.length()) << std::endl;
