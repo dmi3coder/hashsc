@@ -40,14 +40,14 @@ int main(int argc, char* argv[]) {
     switch (argc) {
     case 1:{
         for(string line; std::getline(std::cin, line);) {
-            istringstream *ist = new istringstream(line);
+            auto *ist = new istringstream(line);
             base64_encoder_command command(*ist, cout);
             command.Execute();
             delete ist;
         }
     } break;
     case 2:{
-        istringstream *ist = new istringstream(argv[1]);
+        auto *ist = new istringstream(argv[1]);
         base64_encoder_command command(*ist, cout);
         command.Execute();
         delete ist;
