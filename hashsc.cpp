@@ -1,8 +1,10 @@
 #include <iostream>
-#include "base64.h"
+#include "./command/hashing/base64.h"
 #include <string>
 #include "yaml-cpp/yaml.h"
 #include <fstream>
+#include <sstream>
+#include "command/hashing/base64_encoder_command.h"
 
 using namespace std;
 
@@ -38,12 +40,17 @@ int main(int argc, char* argv[]) {
     switch (argc) {
     case 1:{
         for(string line; std::getline(std::cin, line);) {
-            std::cout << base64_encode(reinterpret_cast<const unsigned char*>(line.c_str()), line.length()) << std::endl;
+            istringstream *ist = new istringstream(line);
+            base64_encoder_command command(*ist, cout);
+            command.Execute();
+            delete ist;
         }
     } break;
     case 2:{
-        std::string encodeText = argv[1];
-        std::cout << base64_encode(reinterpret_cast<const unsigned char*>(encodeText.c_str()), encodeText.length()) << std::endl;
+        istringstream *ist = new istringstream(argv[1]);
+        base64_encoder_command command(*ist, cout);
+        command.Execute();
+        delete ist;
     }
         break;
     case 5:{
