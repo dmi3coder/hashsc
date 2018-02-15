@@ -5,11 +5,7 @@
 
 class command
 {
-protected:
-    std::istream *input;
-    std::ostream *output;
 public:
-    command(std::istream &inputStream, std::ostream &outputStream);
     virtual int Execute() = 0;
 };
 

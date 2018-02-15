@@ -15,7 +15,7 @@ ExternalProject_Add(yamlcpp
 include_directories(${EXTERNAL_INSTALL_LOCATION}/include)
 link_directories(${EXTERNAL_INSTALL_LOCATION}/lib)
 
-set(SOURCE_FILES ./command/hashing/base64.cpp hashsc.cpp ./command/command.cpp ./command/hashing/base64_encoder_command.cpp)
+set(SOURCE_FILES ./command/hashing/base64.cpp hashsc.cpp ./command/command.cpp ./command/hashing/base64_encoder_command.cpp command/stream_command.cpp command/stream_command.h)
 add_executable(hashsc ${SOURCE_FILES})
 add_dependencies(hashsc yamlcpp)
 target_link_libraries(hashsc yaml-cpp)
