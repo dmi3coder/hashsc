@@ -10,15 +10,15 @@
 
 class stripper {
 public:
-    stripper(int *argc, char **argv);
+
+    stripper(const int *argc, char **argv);
 
     void strip();
 
 private:
-    int *argc;
+    std::vector<std::string> *arguments;
     std::string *cmd = nullptr;
     std::vector<std::string> *flags;
-    char **argv;
 
     void stripFlags();
     void stripCommand();

@@ -4,10 +4,10 @@
 
 #include <iostream>
 #include "stripper.h"
+#include "../command/command.h"
 
-stripper::stripper(int *argc, char **argv) {
-    this->argc = argc;
-    this->argv = argv;
+stripper::stripper(const int *argc, char **argv) {
+    this->arguments = new std::vector<std::string>(argv + 1, argv + *argc);
     this->flags = new std::vector<std::string>();
 }
 
@@ -17,15 +17,27 @@ void stripper::strip() {
 }
 
 void stripper::stripFlags() {
-    for (int i = 0; i < *argc; ++i) {
-        std::string flagCandidate = argv[i];
-        if(flagCandidate.find("--") != std::string::npos) {
+    auto iterator = arguments->begin();
+    while (iterator != arguments->end()) {
+        std::string flagCandidate = *iterator;
+        if (flagCandidate.find("--") != std::string::npos) {
             flags->push_back(flagCandidate);
-            std::cout << flagCandidate;
+            iterator = arguments->erase(iterator);
+            std::cout << flagCandidate << std::endl;
+        } else {
+            ++iterator;
         }
     }
 }
 
 void stripper::stripCommand() {
-
+    if(arguments->size() == 1){
+        cmd = new std::string(command::CMD_CONVERT_STREAM);
+    } else if(arguments->size() == 2){
+        cmd = new std::string(command::CMD_ENCODE);
+    } else if(arguments->size() == 3) {
+        cmd = new std::string(arguments->at(1));
+    }
+    arguments->erase(arguments->begin());
+    std::cout << *cmd << std::endl;
 }
