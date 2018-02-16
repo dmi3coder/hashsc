@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "command/hashing/base64_encoder_command.h"
+#include "stripper/stripper.h"
 
 using namespace std;
 
@@ -36,6 +37,7 @@ bool isValid(YAML::Node &config) {
 }
 
 int main(int argc, char* argv[]) {
+    stripper(&argc, argv).strip();
     std::cout << "Handling "<< argc <<" arguments" << std::endl;
     switch (argc) {
     case 1:{
