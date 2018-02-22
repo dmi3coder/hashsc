@@ -9,3 +9,4 @@ int base64_encoder_command::Execute() {
     delete data;
     return 0;
 }
+

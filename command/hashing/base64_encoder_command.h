@@ -6,7 +6,6 @@
 
 class base64_encoder_command : public stream_command
 {
-protected:
 public:
     int Execute() override;
 };

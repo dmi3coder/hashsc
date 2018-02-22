@@ -10,7 +10,6 @@
 
 class stream_command: public command {
 public:
-    stream_command();
     std::istream *input;
     std::ostream *output;
 };

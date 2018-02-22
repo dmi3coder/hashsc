@@ -6,7 +6,12 @@
 #define HASHSC_PARSER_H
 
 
+#include <vector>
+#include "../../command/command.h"
+#include "../../stripper/stripper.h"
+
 class parser {
+    std::vector<command *> * parse(stripper *stripper);
 
 };
 

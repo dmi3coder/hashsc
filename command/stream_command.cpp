@@ -4,4 +4,3 @@
 
 #include "stream_command.h"
 
-stream_command::stream_command() = default;

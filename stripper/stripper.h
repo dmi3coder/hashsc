@@ -14,12 +14,9 @@ public:
     stripper(const int *argc, char **argv);
 
     void strip();
-
-private:
     std::vector<std::string> *arguments;
     std::string *cmd = nullptr;
     std::vector<std::string> *flags;
-
     void stripFlags();
     void stripCommand();
 };

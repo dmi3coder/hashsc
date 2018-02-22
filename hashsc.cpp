@@ -44,15 +44,15 @@ int main(int argc, char* argv[]) {
     case 1:{
         for(string line; std::getline(std::cin, line);) {
             auto *ist = new istringstream(line);
-            base64_encoder_command command(*ist, cout);
-            command.Execute();
+            auto *command = new base64_encoder_command();
+            command->Execute();
             delete ist;
         }
     } break;
     case 2:{
         auto *ist = new istringstream(argv[1]);
-        base64_encoder_command command(*ist, cout);
-        command.Execute();
+        auto *command = new base64_encoder_command();
+        command->Execute();
         delete ist;
     }
         break;
