@@ -9,12 +9,10 @@
 #include "command.h"
 
 class stream_command: public command {
-protected:
+public:
+    stream_command();
     std::istream *input;
     std::ostream *output;
-public:
-    stream_command(std::istream &inputStream, std::ostream &outputStream);
-
 };
 
 

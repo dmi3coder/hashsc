@@ -8,7 +8,6 @@ class base64_encoder_command : public stream_command
 {
 protected:
 public:
-    base64_encoder_command(std::istream &inputStream, std::ostream &outputStream);
     int Execute() override;
 };
 

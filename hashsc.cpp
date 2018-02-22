@@ -37,7 +37,8 @@ bool isValid(YAML::Node &config) {
 }
 
 int main(int argc, char* argv[]) {
-    stripper(&argc, argv).strip();
+    stripper main_stripper(&argc, argv);
+    main_stripper.strip();
     std::cout << "Handling "<< argc <<" arguments" << std::endl;
     switch (argc) {
     case 1:{

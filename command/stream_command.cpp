@@ -4,4 +4,4 @@
 
 #include "stream_command.h"
 
-stream_command::stream_command(std::istream &inputStream, std::ostream &outputStream): input(&inputStream), output(&outputStream) {}
+stream_command::stream_command() = default;

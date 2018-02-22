@@ -15,7 +15,7 @@ ExternalProject_Add(yamlcpp
 include_directories(${EXTERNAL_INSTALL_LOCATION}/include)
 link_directories(${EXTERNAL_INSTALL_LOCATION}/lib)
 
-set(SOURCE_FILES ./command/hashing/base64.cpp hashsc.cpp ./command/command.cpp ./command/hashing/base64_encoder_command.cpp command/stream_command.cpp command/stream_command.h stripper/stripper.cpp stripper/stripper.h)
+set(SOURCE_FILES ./command/hashing/base64.cpp hashsc.cpp ./command/command.cpp ./command/hashing/base64_encoder_command.cpp command/stream_command.cpp command/stream_command.h stripper/stripper.cpp stripper/stripper.h handler/parser/parser.cpp handler/parser/parser.h handler/command_lane.cpp handler/command_lane.h handler/command_context.cpp handler/command_context.h)
 add_executable(hashsc ${SOURCE_FILES})
 add_dependencies(hashsc yamlcpp)
 target_link_libraries(hashsc yaml-cpp)
