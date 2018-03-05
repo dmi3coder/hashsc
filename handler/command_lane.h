@@ -11,12 +11,15 @@
 #include <map>
 #include "../command/command.h"
 
+class command;
+
 class command_lane {
 public:
     void start();
     std::map<const std::string, command*> *commands;
     std::istream *inputStream;
     std::ostream *outputStream;
+    stripper *current_stripper;
 
 };
 

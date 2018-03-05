@@ -39,18 +39,19 @@ bool isValid(YAML::Node &config) {
 }
 
 int main(int argc, char* argv[]) {
-    stripper main_stripper(&argc, argv);
-    main_stripper.strip();
+    auto *main_stripper = new stripper(&argc, argv);
+    main_stripper->strip();
     auto *cmd_parser = new parser();
     auto *lane = new command_lane();
-    cout << main_stripper.arguments->size() << endl;
-    lane->commands = cmd_parser->parse(&main_stripper);
+    cout << main_stripper->arguments->size() << endl;
+    lane->commands = cmd_parser->parse(main_stripper);
     lane->outputStream = &std::cout;
-    if(main_stripper.inputs->empty()){
+    lane->current_stripper = main_stripper;
+    if((main_stripper->inputs->empty())){
         cout << "Inputs is empty, using \u001B[33mcin\u001B[0m instead.." << endl;
         lane->inputStream = &cin;
     } else {
-        auto *ist = new istringstream(main_stripper.inputs->at(0));
+        auto *ist = new istringstream(main_stripper->inputs->at(0));
         lane->inputStream = ist;
     }
     lane->start();
