@@ -11,6 +11,8 @@ std::map<const std::string, command *> *parser::parse(stripper *stripper) {
     auto commandMap = new std::map<const std::string, command*>();
     if(*(stripper->cmd) == command::CMD_ENCODE) {
         commandMap->insert(std::pair<std::string, command*>(command::CMD_ENCODE, new base64_encoder_command()));
+    } else if (*(stripper->cmd) == command::CMD_CONVERT_STREAM) {
+        commandMap->insert(std::pair<std::string, command*>(command::CMD_CONVERT_STREAM, new base64_encoder_command()));
     }
     for(const auto &argument : *stripper->flags){
         if(argument == "--encode"){
