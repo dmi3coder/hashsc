@@ -6,11 +6,12 @@
 #include "../command/stream_command.h"
 
 void command_lane::start() {
-    for (auto &command : commands) {
-        if(auto * io_command = dynamic_cast<stream_command*>(command)){
+    for (auto &command : *commands) {
+        if(auto * io_command = dynamic_cast<stream_command*>(command.second)){
             io_command->input = inputStream;
             io_command->output = outputStream;
         }
-        command->Execute();
+        std::cout << "command execution.." << std::endl;
+        command.second->Execute();
     }
 }

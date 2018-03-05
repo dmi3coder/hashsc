@@ -7,12 +7,14 @@
 
 #include <vector>
 #include <string>
+#include <unordered_map>
+#include <map>
 #include "../command/command.h"
 
 class command_lane {
 public:
     void start();
-    std::vector<command*> commands;
+    std::map<const std::string, command*> *commands;
     std::istream *inputStream;
     std::ostream *outputStream;
 
