@@ -8,7 +8,7 @@
 
 #include "../stream_command.h"
 
-class multiline_command : stream_command {
+class multiline_command : public stream_command {
 public:
     int Execute() override;
 };

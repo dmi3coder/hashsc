@@ -13,6 +13,7 @@ public:
     virtual int Execute() = 0;
     static const std::string CMD_CONVERT_STREAM;
     static const std::string CMD_ENCODE;
+    static const std::string CMD_MULTILINE_ENCODE;
     command_context *context = nullptr;
 };
 

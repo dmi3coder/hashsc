@@ -14,5 +14,5 @@ int multiline_command::Execute() {
         this->context->lane->commands->insert(std::pair<std::string, command*>(command::CMD_ENCODE, new base64_encoder_command()));
     }
 
-    return 0;
+    return 9;
 }
