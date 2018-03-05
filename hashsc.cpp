@@ -6,6 +6,8 @@
 #include <sstream>
 #include "command/hashing/base64_encoder_command.h"
 #include "stripper/stripper.h"
+#include "handler/parser/parser.h"
+#include "handler/command_lane.h"
 
 using namespace std;
 
@@ -39,29 +41,18 @@ bool isValid(YAML::Node &config) {
 int main(int argc, char* argv[]) {
     stripper main_stripper(&argc, argv);
     main_stripper.strip();
-    std::cout << "Handling "<< argc <<" arguments" << std::endl;
-    switch (argc) {
-    case 1:{
-        for(string line; std::getline(std::cin, line);) {
-            auto *ist = new istringstream(line);
-            auto *command = new base64_encoder_command();
-            command->Execute();
-            delete ist;
-        }
-    } break;
-    case 2:{
-        auto *ist = new istringstream(argv[1]);
-        auto *command = new base64_encoder_command();
-        command->Execute();
-        delete ist;
+    auto *cmd_parser = new parser();
+    auto *lane = new command_lane();
+    cout << main_stripper.arguments->size() << endl;
+    lane->commands = cmd_parser->parse(&main_stripper);
+    lane->outputStream = &std::cout;
+    if(main_stripper.inputs->empty()){
+        cout << "Inputs is empty, using \u001B[33mcin\u001B[0m instead.." << endl;
+        lane->inputStream = &cin;
+    } else {
+        auto *ist = new istringstream(main_stripper.inputs->at(0));
+        lane->inputStream = ist;
     }
-        break;
-    case 5:{
-        return handleCommand(argc, argv);
-    }
-        break;
-    default:
-        break;
-    }
+    lane->start();
     return 0;
 }
