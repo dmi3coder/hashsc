@@ -7,7 +7,7 @@
 using namespace std;
 void command_lane::start() {
     auto *context = new command_context(current_stripper, this);
-
+    vector<command*> commandList = {};
     auto iter = commands->begin();
 
     while (iter != commands->end()) {
@@ -15,17 +15,16 @@ void command_lane::start() {
 
         (*iter).second->context = context;
         if(auto * io_command = dynamic_cast<stream_command*>((*iter).second)){
-            io_command->input = inputStream;
-            io_command->output = outputStream;
+            if(io_command->input == nullptr) io_command->input = inputStream;
+            if(io_command->output == nullptr) io_command->output = outputStream;
         }
         std::cout << "command execution.." << std::endl;
         int result = (*iter).second->Execute();
         if(result == 9) {
-            std::cout << "reverse" << std::endl;
             iter = commands->begin();
-        } else {
-            iter++;
+            commands->erase(iter);
         }
+        iter++;
     }
 
 }
