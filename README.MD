@@ -11,6 +11,10 @@ hashsc simplifies this to:
 
 	hashsc "mysecretvalue"
 
+although you still can use it the old way, so that hashsc is won't break compatibility wiht base64:
+
+    echo -n "mysecretvalue" | hashsc
+
 ## Even more features
 
 ### Handling multiline inputs
