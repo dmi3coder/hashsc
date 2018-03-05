@@ -9,9 +9,12 @@
 #include <vector>
 #include "../../command/command.h"
 #include "../../stripper/stripper.h"
+#include <map>
+#include <unordered_map>
 
 class parser {
-    std::vector<command *> * parse(stripper *stripper);
+public:
+    std::map<const std::string, command *> * parse(stripper *stripper);
 
 };
 
