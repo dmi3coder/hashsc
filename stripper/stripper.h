@@ -14,11 +14,13 @@ public:
     stripper(const int *argc, char **argv);
 
     void strip();
-    std::vector<std::string> *arguments;
+    std::vector<std::string> *arguments = nullptr;
     std::string *cmd = nullptr;
-    std::vector<std::string> *flags;
+    std::vector<std::string> *flags = nullptr;
+    std::vector<std::string> *inputs = nullptr;
     void stripFlags();
     void stripCommand();
+    void stripInputs();
 };
 
 

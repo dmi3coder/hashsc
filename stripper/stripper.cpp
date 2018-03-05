@@ -9,21 +9,26 @@
 stripper::stripper(const int *argc, char **argv) {
     this->arguments = new std::vector<std::string>(argv + 1, argv + *argc);
     this->flags = new std::vector<std::string>();
+    this->inputs = new std::vector<std::string>();
 }
 
 void stripper::strip() {
     this->stripFlags();
     this->stripCommand();
+    this->stripInputs();
 }
 
 void stripper::stripFlags() {
+    if(arguments == nullptr){
+        return;
+    }
     auto iterator = arguments->begin();
     while (iterator != arguments->end()) {
         std::string flagCandidate = *iterator;
         if (flagCandidate.find("--") != std::string::npos) {
             flags->push_back(flagCandidate);
             iterator = arguments->erase(iterator);
-            std::cout << flagCandidate << std::endl;
+            std::cout << "new flag: " << flagCandidate << std::endl;
         } else {
             ++iterator;
         }
@@ -31,13 +36,17 @@ void stripper::stripFlags() {
 }
 
 void stripper::stripCommand() {
-    if(arguments->size() == 1){
+    if(arguments == nullptr || arguments->empty()){
         cmd = new std::string(command::CMD_CONVERT_STREAM);
-    } else if(arguments->size() == 2){
+    } else if(arguments->size() == 1){
         cmd = new std::string(command::CMD_ENCODE);
-    } else if(arguments->size() == 3) {
-        cmd = new std::string(arguments->at(1));
+    } else if(arguments->size() == 2) {
+        cmd = new std::string(arguments->at(0));
+        arguments->erase(arguments->begin());
     }
-    arguments->erase(arguments->begin());
     std::cout << *cmd << std::endl;
+}
+
+void stripper::stripInputs() {
+    this->inputs = this->arguments;
 }
