@@ -42,7 +42,7 @@ int multiline_command::Execute() {
     auto *normalizedInputStream = new std::istringstream();
     normalizedInputStream->str(fixedString);
     std::string nextArgument;
-    DLOG(INFO) << "Fixed string: " << fixedString << std::endl;
+    DLOG(INFO) << "Fixed string: "<< std::endl << "#####" << std::endl << fixedString << std::endl << "#####" << std::endl;
     auto *multiLineCommands = new std::vector<stream_command*>;
     while (std::getline(*normalizedInputStream, nextArgument, '\n')) {
         DLOG(INFO) << "LINE: " << nextArgument << std::endl;
