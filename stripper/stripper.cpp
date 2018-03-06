@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <glog/logging.h>
 #include "stripper.h"
 #include "../command/command.h"
 
@@ -28,7 +29,7 @@ void stripper::stripFlags() {
         if (flagCandidate.find("--") != std::string::npos) {
             flags->push_back(flagCandidate);
             iterator = arguments->erase(iterator);
-            std::cout << "new flag: " << flagCandidate << std::endl;
+            DLOG(INFO) << "new flag: " << flagCandidate << std::endl;
         } else {
             ++iterator;
         }
@@ -44,7 +45,7 @@ void stripper::stripCommand() {
         cmd = new std::string(arguments->at(0));
         arguments->erase(arguments->begin());
     }
-    std::cout << *cmd << std::endl;
+    DLOG(INFO) << *cmd << std::endl;
 }
 
 void stripper::stripInputs() {
