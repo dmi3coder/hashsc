@@ -2,6 +2,7 @@
 // Created by dmi3coder on 2/16/18.
 //
 
+#include <glog/logging.h>
 #include "command_lane.h"
 #include "../command/stream_command.h"
 using namespace std;
@@ -11,14 +12,14 @@ void command_lane::start() {
     auto iter = commands->begin();
 
     while (iter != commands->end()) {
-        cout << "commands:" << commands->size() << endl;
+        DLOG(INFO) << "commands:" << commands->size() << endl;
 
         (*iter).second->context = context;
         if(auto * io_command = dynamic_cast<stream_command*>((*iter).second)){
             if(io_command->input == nullptr) io_command->input = inputStream;
             if(io_command->output == nullptr) io_command->output = outputStream;
         }
-        std::cout << "command execution.." << std::endl;
+        DLOG(INFO) << "command execution.." << std::endl;
         int result = (*iter).second->Execute();
         if(result == 9) {
             iter = commands->begin();
