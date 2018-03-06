@@ -5,6 +5,7 @@
 #include "multiline_command.h"
 #include "../hashing/base64_encoder_command.h"
 #include <sstream>
+#include <glog/logging.h>
 
 std::string insertLines(std::istringstream *is) {
     char c;
@@ -41,10 +42,10 @@ int multiline_command::Execute() {
     auto *normalizedInputStream = new std::istringstream();
     normalizedInputStream->str(fixedString);
     std::string nextArgument;
-    std::cout << "Fixed string: " << fixedString << std::endl;
+    DLOG(INFO) << "Fixed string: " << fixedString << std::endl;
     auto *multiLineCommands = new std::vector<stream_command*>;
     while (std::getline(*normalizedInputStream, nextArgument, '\n')) {
-        std::cout << "LINE: " << nextArgument << std::endl;
+        DLOG(INFO) << "LINE: " << nextArgument << std::endl;
         auto *lineEncodeCommand = new base64_encoder_command();
         auto *lineStream = new std::istringstream(nextArgument);
         lineEncodeCommand->input = lineStream;
