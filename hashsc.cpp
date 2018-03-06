@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
     lane->outputStream = &std::cout;
     lane->current_stripper = main_stripper;
     if((main_stripper->inputs->empty())){
-        cout << "Inputs is empty, using \u001B[33mcin\u001B[0m instead.." << endl;
+        DLOG(INFO) << "Inputs is empty, using \u001B[33mcin\u001B[0m instead.." << endl;
         lane->inputStream = &cin;
     } else {
         auto *ist = new istringstream(main_stripper->inputs->at(0));
