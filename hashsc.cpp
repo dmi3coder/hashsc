@@ -8,6 +8,7 @@
 #include "stripper/stripper.h"
 #include "handler/parser/parser.h"
 #include "handler/command_lane.h"
+#include <glog/logging.h>
 
 using namespace std;
 
@@ -17,9 +18,9 @@ int handleCommand(int argc, char* argv[]) {
     cout << argv[1] << endl;
     string argument = argv[1];
     if(argument == "--append") {
-        std::cout << "parsing..." << std::endl;
+        LOG(INFO) << "parsing..." << std::endl;
         YAML::Node config = YAML::LoadFile(argv[2]);
-        cout << config["apiVersion"].as<string>() << endl;
+        LOG(INFO) << config["apiVersion"].as<string>() << endl;
         if(isValid(config)) {
             YAML::Node data = config["data"];
             string encodeText = argv[4];
@@ -27,7 +28,7 @@ int handleCommand(int argc, char* argv[]) {
             string filepath = argv[2];
             std::ofstream fout(filepath);
             fout << config;
-            cout << "OK" << endl;
+            LOG(INFO) << "OK" << endl;
         } else {
             cout << "Sorry, something wrong with this file" << endl;
         }
@@ -39,11 +40,13 @@ bool isValid(YAML::Node &config) {
 }
 
 int main(int argc, char* argv[]) {
+    FLAGS_alsologtostderr = true;
+    google::InitGoogleLogging(argv[0]);
     auto *main_stripper = new stripper(&argc, argv);
     main_stripper->strip();
     auto *cmd_parser = new parser();
     auto *lane = new command_lane();
-    cout << main_stripper->arguments->size() << endl;
+    DLOG(INFO) << "Stripper arguments size:" << main_stripper->arguments->size() << endl;
     lane->commands = cmd_parser->parse(main_stripper);
     lane->outputStream = &std::cout;
     lane->current_stripper = main_stripper;
