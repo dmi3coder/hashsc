@@ -23,6 +23,7 @@ std::map<const std::string, command *> *parser::parse(stripper *stripper) {
         } else if(argument == "--ml"){
             commandMap->insert(std::pair<std::string, command*>(command::CMD_MULTILINE_ENCODE, new multiline_command()));
             commandMap->erase(command::CMD_ENCODE);
+            commandMap->erase(command::CMD_CONVERT_STREAM);
         }
     }
     DLOG(INFO) << "Parser commands size: " << commandMap->size() << std::endl;
