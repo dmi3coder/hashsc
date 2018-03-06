@@ -2,6 +2,7 @@
 // Created by dmi3coder on 2/16/18.
 //
 
+#include <glog/logging.h>
 #include "parser.h"
 #include "../../command/hashing/base64_encoder_command.h"
 #include "../../command/handling/multiline_command.h"
@@ -24,7 +25,7 @@ std::map<const std::string, command *> *parser::parse(stripper *stripper) {
             commandMap->erase(command::CMD_ENCODE);
         }
     }
-    std::cout << "Size: " << commandMap->size() << std::endl;
+    DLOG(INFO) << "Parser commands size: " << commandMap->size() << std::endl;
 
     return commandMap;
 }
