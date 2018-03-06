@@ -39,4 +39,31 @@ still you can use hashsc style for usability (position of --ml is not stricted t
 ## Limitations
 
 hashsc currently doesn't support decoding, even though it is simple feature, it wasn't included in this release.
-Please star project to catalyse this project, or even better, contribute to it.
+Please star to catalyse this project, or even better, contribute to it.
+
+## Next releases
+
+### 0.6
+
+- Decoding of base64
+- Multiline support for decoding
+- Multiline custom delimiter support
+
+### 0.7-0.8
+
+- Output in different formats e.g JSON, XML, YAML
+- Key-value output into formats
+- Key supply for values
+
+### 0.9
+
+- Generation of Kubernetes secret from key-value inputs
+
+### 1.0
+
+- Decoding from Kubernetes secret file
+- Commenting secret hashes with decoded value
+
+## Profit for zsh users
+
+If you're using zsh, hashsc can be faster called with hsc and then TAB.
