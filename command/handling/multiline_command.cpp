@@ -9,7 +9,7 @@
 
 std::string insertLines(std::istringstream *is) {
     char c;
-    std::ostringstream os = {};
+    std::ostringstream os;
     enum { CHARACTER, ESCAPE } state = CHARACTER;
 
     while (is->get(c)) {
