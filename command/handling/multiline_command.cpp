@@ -4,13 +4,7 @@
 
 #include "multiline_command.h"
 #include "../hashing/base64_encoder_command.h"
-#include "map"
-#include "../command.h"
-#include "istream"
 #include <sstream>
-#include <string>
-#include <iostream>
-#include <stdexcept>
 
 std::string insertLines(std::istringstream *is) {
     char c;
@@ -44,16 +38,24 @@ int multiline_command::Execute() {
     auto *is = new std::istringstream();
     is->str(*new std::string(std::istreambuf_iterator<char>(*input), {}));
     std::string fixedString = insertLines(is);
-    is->str(fixedString);
+    auto *normalizedInputStream = new std::istringstream();
+    normalizedInputStream->str(fixedString);
     std::string nextArgument;
     std::cout << "Fixed string: " << fixedString << std::endl;
-    while (std::getline(*is, nextArgument, '\n')) {
+    auto *multiLineCommands = new std::vector<stream_command*>;
+    while (std::getline(*normalizedInputStream, nextArgument, '\n')) {
         std::cout << "LINE: " << nextArgument << std::endl;
         auto *lineEncodeCommand = new base64_encoder_command();
         auto *lineStream = new std::istringstream(nextArgument);
         lineEncodeCommand->input = lineStream;
-        this->context->lane->commands->insert(std::pair<std::string, command*>(command::CMD_ENCODE, lineEncodeCommand));
+        multiLineCommands->push_back(lineEncodeCommand);
     }
 
-    return 9;
+    for(auto cmd : *multiLineCommands) {
+        cmd->output = output;
+        cmd->context = context;
+        cmd->Execute();
+    }
+
+    return 0;
 }
