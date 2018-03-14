@@ -1,6 +1,7 @@
-Easier way to Kuberentes secret hashing
+Easier way to Kuberentes secret hashing [![Build Status](https://travis-ci.org/dmitrychaban/hashsc.svg?branch=master)](https://travis-ci.org/dmitrychaban/hashsc)
 ============================================
 `v0.5.0`
+
 
 ## Usage
 
