@@ -1,6 +1,7 @@
-language: cpp
-compiler: gcc
+language: go
+
+go:
+  - master
 
 script:
- - cmake .
- - make
+  - go build ./hashsc.go
