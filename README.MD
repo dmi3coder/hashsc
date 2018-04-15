@@ -1,5 +1,7 @@
-Easier way to Kuberentes secret hashing
+Easier way to Kuberentes secret hashing [![Build Status](https://travis-ci.org/dmitrychaban/hashsc.svg?branch=master)](https://travis-ci.org/dmitrychaban/hashsc)
 ============================================
+`v0.5.0`
+
 
 ## Usage
 
@@ -35,6 +37,17 @@ still you can use hashsc style for usability (position of --ml is not stricted t
     $ hashsc --ml "secret1\nsecret2"
     c2VjcmV0MQ==
     c2VjcmV0Mg==
+
+## Installation
+
+### Linux
+
+    curl -L -s https://github.com/dmitrychaban/hashsc/releases/download/v0.5.0/hashsc-v0_5_0-ubuntu.tar.xz | sudo tar -xJf - -C /usr/bin/
+
+### MacOS
+
+    curl -L -s https://github.com/dmitrychaban/hashsc/releases/download/v0.5.0/hashsc-v0_5_0-macos.tar.gz | tar -xJf - -C /usr/local/bin/
+
 
 ## Limitations
 
