@@ -1,10 +1,9 @@
 package main
 
-import "os"
+import (
+	"./handler/parser"
+)
 
 func main() {
-	args := os.Args
-	for e := range args {
-		println(args[e])
-	}
+	parser.Parse()
 }
