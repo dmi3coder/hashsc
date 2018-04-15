@@ -2,6 +2,7 @@ package main
 
 import (
 	"./handler/parser"
+	"encoding/base64"
 )
 
 func main() {
@@ -9,6 +10,7 @@ func main() {
 	if parser.FlagCount == 0 {
 		//TODO: handle incoming stream
 	} else {
-		//TODO: handle flags
+		response := base64.StdEncoding.EncodeToString([]byte(parser.Arguments[0]))
+		println(response)
 	}
 }

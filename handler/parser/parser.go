@@ -7,11 +7,12 @@ import (
 var (
 	FlagMultiline bool
 	FlagCount int
+	Arguments []string
 )
 
 func Parse() {
 	flag.BoolVarP(&FlagMultiline, "multiline", "m", false, "Parse input into multiple elements with delimiter")
 	flag.Parse()
 	FlagCount = flag.NFlag()
-
+	Arguments = flag.Args()
 }
