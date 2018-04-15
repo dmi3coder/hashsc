@@ -12,6 +12,7 @@ var (
 
 func Parse() {
 	flag.BoolVarP(&FlagMultiline, "multiline", "m", false, "Parse input into multiple elements with delimiter")
+	//TODO: Handle stripper functionality
 	flag.Parse()
 	FlagCount = flag.NFlag()
 	Arguments = flag.Args()
